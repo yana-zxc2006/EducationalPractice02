@@ -1,0 +1,24 @@
+INSERT INTO users (email, name, hashed_password, birth_date) VALUES 
+('test@mail.com', 'Анна', 'fakehash', '1995-04-23'),
+('alex@mail.com', 'Алексей', 'fakehash', '1988-11-02');
+
+INSERT INTO diary_entries (user_id, content, mood, planets_positions) VALUES
+(1, 'Сегодня было вдохновение', 'счастлив', 'Солнце в Скорпионе'),
+(1, 'Устала после работы', 'усталость', 'Луна в Раке'),
+(2, 'Нашел старую книгу', 'ностальгия', 'Венера в Весах');
+
+
+SELECT * FROM users WHERE birth_date > '1990-01-01';
+
+INSERT INTO diary_entries (user_id, content, mood) VALUES (1, 'Новый эксперимент', 'любопытно');
+
+UPDATE users SET birth_place = 'Москва' WHERE name = 'Анна';
+
+
+DELETE FROM diary_entries WHERE mood = 'усталость' AND user_id = 1;
+
+
+SELECT users.name, diary_entries.content, diary_entries.mood 
+FROM users 
+JOIN diary_entries ON users.id = diary_entries.user_id 
+WHERE diary_entries.created_at > NOW() - INTERVAL '30 days';

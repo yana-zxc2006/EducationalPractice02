@@ -1,0 +1,17 @@
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    name VARCHAR(100),
+    hashed_password TEXT NOT NULL,
+    birth_date TIMESTAMP,
+    birth_place VARCHAR(255)
+);
+
+CREATE TABLE diary_entries (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    content TEXT NOT NULL,
+    mood VARCHAR(50),
+    planets_positions TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
